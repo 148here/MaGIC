@@ -65,6 +65,8 @@ pip install -r requirements.txt
     metadata;
   - replace GUI `opencv-python` with `opencv-python-headless==4.11.0.86`,
     because the server does not provide the Qt library needed by the GUI wheel.
+  - install `efficientnet_pytorch==0.7.1` for the SketchInpainter online MuGE
+    edge extractor.
 - If direct Hugging Face access is blocked or slow, use:
 
 ```bash

@@ -64,6 +64,7 @@ Known working environment adjustments on the A100 two-GPU instance:
 
 - use `pip==24.0` before installing `pytorch_lightning==1.5.9`;
 - replace `opencv-python` with `opencv-python-headless==4.11.0.86`.
+- install `efficientnet_pytorch==0.7.1` for online MuGE sketch preparation.
 
 The user uploaded the official sketch tau-net checkpoint here:
 
