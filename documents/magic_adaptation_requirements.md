@@ -57,6 +57,14 @@ pip install -r requirements.txt
 - If the server GPU requires a newer CUDA-compatible wheel, follow the
   repository README guidance and use the PyTorch 1.12.1 + CUDA 11.3 option
   before making larger dependency changes.
+- On the recorded two-GPU A100 instance, the working dependency adjustments
+  were:
+  - install `torch==1.12.1+cu113` and `torchvision==0.13.1+cu113`;
+  - downgrade pip to `pip==24.0` before installing
+    `pytorch_lightning==1.5.9`, because newer pip rejects its old dependency
+    metadata;
+  - replace GUI `opencv-python` with `opencv-python-headless==4.11.0.86`,
+    because the server does not provide the Qt library needed by the GUI wheel.
 - If direct Hugging Face access is blocked or slow, use:
 
 ```bash
@@ -93,6 +101,17 @@ stabilityai/stable-diffusion-2-inpainting/512-inpainting-ema.ckpt
 ```
 
 - Do not commit raw model weights.
+- Download helper:
+
+```bash
+python scripts/download_sd_inpaint.py
+```
+
+or, when a compatible endpoint is available:
+
+```bash
+python scripts/download_sd_inpaint.py --endpoint https://hf-mirror.com
+```
 
 ## Smoke Inference
 

@@ -60,6 +60,11 @@ If the server GPU needs the README's newer CUDA wheel path, use the PyTorch
 1.12.1 + CUDA 11.3 requirement variant before making broader dependency
 changes.
 
+Known working environment adjustments on the A100 two-GPU instance:
+
+- use `pip==24.0` before installing `pytorch_lightning==1.5.9`;
+- replace `opencv-python` with `opencv-python-headless==4.11.0.86`.
+
 The user uploaded the official sketch tau-net checkpoint here:
 
 ```bash
@@ -70,6 +75,12 @@ The SD 2.1 inpainting backbone may be downloaded online into:
 
 ```bash
 checkpoints/512-inpainting-ema.ckpt
+```
+
+Downloader entrypoint:
+
+```bash
+python scripts/download_sd_inpaint.py
 ```
 
 Use `HF_ENDPOINT=https://hf-mirror.com` if Hugging Face access is blocked or
