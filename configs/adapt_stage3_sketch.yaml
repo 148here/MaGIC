@@ -1,0 +1,74 @@
+general:
+  config: configs/stable-diffusion/v2-inpainting-inference.yaml
+  sd_ckpt: checkpoints/512-inpainting-ema.ckpt
+  vae_ckpt: None
+  sampler: ddim
+  rand_seed: 20260425
+  save_path: output/adapt_infer_smoke
+  device: cuda
+  cuda_visible_devices: "1"
+
+infer:
+  batch_size: 1
+  n_samples: 1
+  fixed_resolution: true
+  steps: 20
+  init_C: 4
+  down_factor: 8
+  classifier_free_guidance: 7.5
+  load_prompt_text: true
+  prompt_dir: output/stage3_smoke/prompt
+  prompt_text: ""
+  data:
+    img_path: output/stage3_smoke/img
+    mask_path: output/stage3_smoke/mask
+  auxiliary:
+    conditions:
+      - sketch
+    cond_weight: 1.0
+    sketch_path: output/stage3_smoke/sketch
+    sketch_ckpt: checkpoints/tau_net_sketch.pth
+    sketch_inp_type: sketch
+  CMB:
+    enable: false
+    P: 30
+    Q: 5
+
+neg_prompt: "longbody, lowres, bad anatomy, bad hands, missing fingers, extra digit, fewer digits, cropped, worst quality, low quality"
+
+train:
+  output_dir: output/train_tau_sketch_smoke
+  data_root: /cpfs01/projects-SSD/cfff-27504eab520e_SSD/zwz_42312/yza/data/mural1
+  splits:
+    - train
+  random_mask_dirs:
+    - /cpfs01/projects-SSD/cfff-27504eab520e_SSD/zwz_42312/yza/data/mural1/train/1/masks
+  sketchinpainter_root: /cpfs01/projects-SSD/cfff-27504eab520e_SSD/zwz_42312/yza/SketchInpainter
+  sketch_config_path: /cpfs01/projects-SSD/cfff-27504eab520e_SSD/zwz_42312/yza/SketchInpainter/dataset/makesketch/config.py
+  muge_source_root: /cpfs01/projects-SSD/cfff-27504eab520e_SSD/zwz_42312/yza/SketchInpainter/external/UAED_MuGE
+  muge_checkpoint: /cpfs01/projects-SSD/cfff-27504eab520e_SSD/zwz_42312/yza/data/temp_for_weight/muge-epoch-19-checkpoint.pth
+  resolution: 512
+  seed: 20260425
+  max_steps: 1
+  batch_size: 1
+  learning_rate: 5.0e-6
+  save_every_steps: 1
+  max_samples_to_scan: 0
+  magic_sketch_polarity: white_on_black
+  sketch_overrides:
+    sigma_mean: 9.1
+    sigma_std: 1.82
+    move_prob: 0.6
+    spatial_smooth_sigma: 1.4
+    feather_px: 6
+    cp_sigma_mean: 1.6
+    cp_sigma_std: 0.28
+    cp_radius: 12.0
+    cp_spatial_smooth: 1.05
+    field_sigma: 4.2
+    adaptive_stroke_mode: mask_density_bins
+    adaptive_stroke_density_low: 0.015
+    adaptive_stroke_density_high: 0.060
+    adaptive_stroke_thin_width: 2
+    adaptive_stroke_medium_width: 3
+    adaptive_stroke_thick_width: 4
