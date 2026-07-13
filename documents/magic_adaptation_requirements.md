@@ -246,6 +246,45 @@ with frozen SD inpainting components and trainable sketch tau-net only:
 python train_tau_sketch.py --config configs/adapt_stage3_sketch.yaml --max-steps 1 --batch-size 1
 ```
 
+## Verified Smoke Results
+
+Verified on 2026-07-13 on the recorded two-GPU instance with:
+
+```bash
+CUDA_VISIBLE_DEVICES=1
+HF_ENDPOINT=https://hf-mirror.com
+conda run -n magic ...
+```
+
+- SD inpainting backbone downloaded from
+  `sd2-community/stable-diffusion-2-inpainting` to
+  `checkpoints/512-inpainting-ema.safetensors`.
+- Verified `512-inpainting-ema.safetensors` SHA256:
+
+```text
+b29e2ed9a8fe58e76f7e801bda091d23738bd74c1da3f339bcbe2d40922fcb60
+```
+
+- Stage3 sample preparation completed and wrote one sample under:
+
+```bash
+output/stage3_smoke/
+```
+
+- Adapted sketch-only inference completed and wrote:
+
+```bash
+output/adapt_infer_smoke/sample_000_0-0-1_000.png
+```
+
+- Training smoke completed one optimizer step with batch size 1 and wrote:
+
+```bash
+output/train_tau_sketch_smoke/latest_tau_net_sketch.pth
+output/train_tau_sketch_smoke/latest_training_state.pth
+output/train_tau_sketch_smoke/losses.jsonl
+```
+
 ## Failure Policy
 
 - For bounded smoke tests, use a timeout or a small sample count.
