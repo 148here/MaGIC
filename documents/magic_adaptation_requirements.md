@@ -67,6 +67,8 @@ pip install -r requirements.txt
     because the server does not provide the Qt library needed by the GUI wheel.
   - install `efficientnet_pytorch==0.7.1` for the SketchInpainter online MuGE
     edge extractor.
+  - pin `open-clip-torch==2.0.2`; newer releases caused a transformer
+    attention-mask shape error during the SD inpainting smoke test.
 - If direct Hugging Face access is blocked or slow, use:
 
 ```bash
@@ -115,7 +117,7 @@ general:
 - Expected SHA256 for `512-inpainting-ema.safetensors` from the mirror:
 
 ```text
-2a208a7ded5d42dcb0c0ec908b23c631002091e06afe7e76d16cd11079f8d4e3
+b29e2ed9a8fe58e76f7e801bda091d23738bd74c1da3f339bcbe2d40922fcb60
 ```
 
 - Do not commit raw model weights.

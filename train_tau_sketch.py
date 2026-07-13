@@ -71,6 +71,9 @@ def _disable_checkpointing(module) -> int:
         if hasattr(child, "use_checkpoint"):
             child.use_checkpoint = False
             disabled += 1
+        if hasattr(child, "checkpoint") and isinstance(child.checkpoint, bool):
+            child.checkpoint = False
+            disabled += 1
     return disabled
 
 

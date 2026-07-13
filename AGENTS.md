@@ -65,6 +65,8 @@ Known working environment adjustments on the A100 two-GPU instance:
 - use `pip==24.0` before installing `pytorch_lightning==1.5.9`;
 - replace `opencv-python` with `opencv-python-headless==4.11.0.86`.
 - install `efficientnet_pytorch==0.7.1` for online MuGE sketch preparation.
+- pin `open-clip-torch==2.0.2`; newer releases caused a transformer
+  attention-mask shape error during the SD inpainting smoke test.
 
 The user uploaded the official sketch tau-net checkpoint here:
 
@@ -94,7 +96,7 @@ python scripts/download_sd_inpaint.py
 Expected SHA256 for `512-inpainting-ema.safetensors` from the mirror:
 
 ```text
-2a208a7ded5d42dcb0c0ec908b23c631002091e06afe7e76d16cd11079f8d4e3
+b29e2ed9a8fe58e76f7e801bda091d23738bd74c1da3f339bcbe2d40922fcb60
 ```
 
 Use `HF_ENDPOINT=https://hf-mirror.com` if Hugging Face access is blocked or
