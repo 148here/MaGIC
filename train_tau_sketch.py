@@ -65,6 +65,15 @@ def _target_for_model(model, x_start, noise, t):
     raise NotImplementedError("Unsupported parameterization: %s" % model.parameterization)
 
 
+def _disable_checkpointing(module) -> int:
+    disabled = 0
+    for child in module.modules():
+        if hasattr(child, "use_checkpoint"):
+            child.use_checkpoint = False
+            disabled += 1
+    return disabled
+
+
 def main() -> None:
     args = parse_args()
     cfg = OmegaConf.load(args.config)
@@ -114,6 +123,8 @@ def main() -> None:
     sd_model.eval()
     for param in sd_model.parameters():
         param.requires_grad_(False)
+    disabled_checkpoint_modules = _disable_checkpointing(sd_model)
+    print("disabled_sd_checkpoint_modules=%d" % disabled_checkpoint_modules, flush=True)
 
     tau_net = get_tau_nets(cfg, device, ExtraCondition.sketch)
     tau_model = tau_net["model"]
