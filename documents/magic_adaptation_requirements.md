@@ -90,16 +90,32 @@ export HF_ENDPOINT=https://hf-mirror.com
 checkpoints/tau_net_sketch.pth
 ```
 
+- The original `stabilityai/stable-diffusion-2-inpainting` repository is no
+  longer publicly accessible from the recorded environment. Use the community
+  mirror instead:
+
+```text
+sd2-community/stable-diffusion-2-inpainting
+```
+
 - The Stable Diffusion inpainting backbone may be downloaded online:
 
 ```bash
-checkpoints/512-inpainting-ema.ckpt
+checkpoints/512-inpainting-ema.safetensors
 ```
 
-- Source expected by the official README:
+- MaGIC can load `.safetensors` through `ldm.util.read_state_dict`; the adapted
+  config therefore uses:
+
+```yaml
+general:
+  sd_ckpt: checkpoints/512-inpainting-ema.safetensors
+```
+
+- Expected SHA256 for `512-inpainting-ema.safetensors` from the mirror:
 
 ```text
-stabilityai/stable-diffusion-2-inpainting/512-inpainting-ema.ckpt
+2a208a7ded5d42dcb0c0ec908b23c631002091e06afe7e76d16cd11079f8d4e3
 ```
 
 - Do not commit raw model weights.

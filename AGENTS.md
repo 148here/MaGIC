@@ -72,16 +72,29 @@ The user uploaded the official sketch tau-net checkpoint here:
 /home/zwz_42312/temp/tau_net_sketch.pth
 ```
 
-The SD 2.1 inpainting backbone may be downloaded online into:
+The original `stabilityai/stable-diffusion-2-inpainting` repository is no
+longer publicly accessible. Use the community mirror:
+
+```text
+sd2-community/stable-diffusion-2-inpainting
+```
+
+The SD 2.1 inpainting backbone should be downloaded online into:
 
 ```bash
-checkpoints/512-inpainting-ema.ckpt
+checkpoints/512-inpainting-ema.safetensors
 ```
 
 Downloader entrypoint:
 
 ```bash
 python scripts/download_sd_inpaint.py
+```
+
+Expected SHA256 for `512-inpainting-ema.safetensors` from the mirror:
+
+```text
+2a208a7ded5d42dcb0c0ec908b23c631002091e06afe7e76d16cd11079f8d4e3
 ```
 
 Use `HF_ENDPOINT=https://hf-mirror.com` if Hugging Face access is blocked or

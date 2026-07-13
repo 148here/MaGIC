@@ -1,6 +1,6 @@
 general:
   config: configs/stable-diffusion/v2-inpainting-inference.yaml
-  sd_ckpt: checkpoints/512-inpainting-ema.ckpt
+  sd_ckpt: checkpoints/512-inpainting-ema.safetensors
   vae_ckpt: None
   sampler: ddim
   rand_seed: 20260425

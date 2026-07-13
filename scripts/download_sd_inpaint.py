@@ -9,8 +9,8 @@ from pathlib import Path
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--repo-id", default="stabilityai/stable-diffusion-2-inpainting")
-    parser.add_argument("--filename", default="512-inpainting-ema.ckpt")
+    parser.add_argument("--repo-id", default="sd2-community/stable-diffusion-2-inpainting")
+    parser.add_argument("--filename", default="512-inpainting-ema.safetensors")
     parser.add_argument("--output-dir", default="checkpoints")
     parser.add_argument("--endpoint", default="")
     return parser.parse_args()
